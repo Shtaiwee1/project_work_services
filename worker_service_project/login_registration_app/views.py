@@ -1,7 +1,8 @@
+from django.http import HttpResponse
 from django.shortcuts import render , redirect
 from django.contrib import messages#import error messages for display
 import bcrypt#importing bcrypt after installing using pip install bcrypt used for hashing,encoding and decoding
-from .models import User#importing class from models.py
+from .models import User , Worker#importing class from models.py
 
 #root page
 def index(request):
@@ -67,3 +68,29 @@ def delete(request):#the logout button redirects to the (destroy) route in the u
 
 def join_form(request):
     return render(request, "join_workers.html")
+
+def create_user(request):
+    first_name=request.POST['first_name']
+    last_name=request.POST['last_name']
+    email=request.POST['email']
+    password=request.POST['password']
+    pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+    User.objects.create(first_name=first_name,
+                        last_name=last_name,
+                        email=email,
+                        password=pw_hash)
+    return HttpResponse('')
+
+
+def create_worker(request):
+    phone_number=request.POST['phone_number']
+    location=request.POST['location']
+    career=request.POST['career']
+    price=request.POST['price']
+    desc=request.POST['desc']
+    Worker.objects.create(phone_number=phone_number,
+                        location=location,
+                        career=career,
+                        price=price,
+                        desc=desc)
+    return HttpResponse('')
