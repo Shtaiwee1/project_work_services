@@ -69,6 +69,7 @@ def delete(request):#the logout button redirects to the (destroy) route in the u
 def join_form(request):
     return render(request, "join_workers.html")
 
+<<<<<<< HEAD
 def create_user(request):
     first_name=request.POST['first_name']
     last_name=request.POST['last_name']
@@ -94,3 +95,6 @@ def create_worker(request):
                         price=price,
                         desc=desc)
     return HttpResponse('')
+=======
+
+>>>>>>> ef17bc8ce534b391a5d220a66c279ae4a8768fa3
