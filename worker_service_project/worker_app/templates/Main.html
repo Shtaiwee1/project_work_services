@@ -38,7 +38,7 @@
     <div class="bg mask ">
 
         <nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block"
-            style="z-index: 2000; ">
+            style="z-index: 2000; background-color: black; ">
             <div class="container-fluid" style="display: flex; justify-content: space-between;">
                 <!-- Navbar brand -->
                 <a class="navbar-brand nav-link" target="_blank" href="https://mdbootstrap.com/docs/standard/">
@@ -56,26 +56,26 @@
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link me-5" href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA"
-                                rel="nofollow" target="_blank">Home</a>
+                                rel="nofollow" >Home</a>
                         </li>
                     </ul>
                     <ul class="navbar-nav d-flex flex-row ">
                         <!-- Icons -->
                         <li class="nav-item ">
                             <a class="nav-link me-5" href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA"
-                                rel="nofollow" target="_blank">My Refernces</a>
+                                rel="nofollow" >My Refernces</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link me-5" href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA"
-                                rel="nofollow" target="_blank">Join Our Workers</a>
+                            <a class="nav-link me-5" href="/join_workers"
+                                rel="nofollow" >Join Our Workers</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link me-5" href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA"
-                                rel="nofollow" target="_blank">My Profile</a>
+                            <a class="nav-link me-5" href="/edit_page"
+                                rel="nofollow" >My Profile</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link me-5" href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA"
-                                rel="nofollow" target="_blank">Log Out</a>
+                            <a class="nav-link me-5" href="/"
+                                rel="nofollow">Log Out</a>
                         </li>
                     </ul>
                 </div>
@@ -101,7 +101,8 @@
                     <h5 class="card-title">Card title</h5>
                     <p class="card-text">This card has supporting text below as a natural lead-in to additional content.
                     </p>
-                    <form action="">
+                    <form action="/details" method="post">
+                        {% csrf_token %}
                         <button type="submit" class="btn btn-primary text-center " style="background-color: orange;">See
                             Contacts</button>
                     </form>

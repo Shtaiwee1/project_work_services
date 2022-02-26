@@ -46,10 +46,10 @@ class UserManager(models.Manager):#Manager class to customize error messages and
         errors = {}
         #email validation right format error for the login form
         EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
-        if not EMAIL_REGEX.match(postData['email_login']):                
+        if not EMAIL_REGEX.match(postData['email']):                
             errors['email-login'] = "Invalid email address!"
         #password length smaller than 18 characters error
-        if len(postData['password_login']) < 18:
+        if len(postData['password']) < 5:
             errors["password-login"] = "Password should be at least 18 characters"
         return errors
 #the User class and its attributes
@@ -69,5 +69,16 @@ class Worker(models.Model):
     location=models.CharField(max_length=255)
     career=models.CharField(max_length=255)
     desc=models.TextField()
+    user_has_worker=models.ManyToManyField(User, related_name="workers")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Service(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+    worker = models.ForeignKey(Worker, related_name="services", on_delete = models.CASCADE)
+    services_has_user=models.ManyToManyField(User, related_name="services")
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    
