@@ -1,7 +1,8 @@
+from django.http import HttpResponse
 from django.shortcuts import render , redirect
 from django.contrib import messages#import error messages for display
 import bcrypt#importing bcrypt after installing using pip install bcrypt used for hashing,encoding and decoding
-from .models import User#importing class from models.py
+from .models import User , Worker#importing class from models.py
 
 #root page
 def index(request):
@@ -67,5 +68,4 @@ def delete(request):#the logout button redirects to the (destroy) route in the u
 
 def join_form(request):
     return render(request, "join_workers.html")
-
 
