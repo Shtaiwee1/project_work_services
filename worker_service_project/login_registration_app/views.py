@@ -9,44 +9,25 @@ def index(request):
     context={"all_users":User.objects.all()}#passes the models attributes to the rendered page
     return render(request, "log_reg.html",context)
 #registration information processing function and validation
-def process_registration(request):
-    errors = User.objects.basic_validator(request.POST)#passes the data from form to the validators function in models which are then called (postData)-validates and then returns errors from the models page
-    if len(errors) > 0:#if there are errors loop through keys and values in the errors dictionary
-        for key, value in errors.items():
-            messages.error(request, value)
-        return redirect('/')#if there are any errors redirect to the root page
-    else:
-        #save info from form and create a new user with a hashed password
-        first_name=request.POST['first_name']
-        last_name=request.POST['last_name']
-        email=request.POST['email']
-        password=request.POST['password']
-        pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()#hashing the new users password
-        #creating a new user using info from registration form
-        new_user=User.objects.create(first_name=first_name,
-                                    last_name=last_name,
-                                    email=email,
-                                    password=pw_hash)
-        return redirect(f"/process/success_register/{new_user.id}")#redirection to the success page passing the user_id via url to display the name
-#process and validation for the login form information
 def check(request):
     errors = User.objects.basic_validator_second(request.POST)
+    print("hello")
     if len(errors) > 0:
         for key, value in errors.items():
-            messages1=messages.error(request, value)
+            messages.error(request, value)
         return redirect('/')#if there are any errors redirect to the root page no access for the success page
     else:
-        user = User.objects.filter(email=request.POST['email_login'])#searches the database for the email input in the login form
+        user = User.objects.filter(email=request.POST['email'])#searches the database for the email input in the login form
         if user: #if there is a user with the input email = true
             logged_user = user[0]#save the user info ina varibale called logged_user
         #check if the password form thelogin form equals the hashed password in the database
         #converts the password from the form from string to byte and the hashed password in the database from hash to byte and compares the two of them 
-        if bcrypt.checkpw(request.POST['password_login'].encode(), logged_user.password.encode()):#if the passwords match redirect to success page and save the logged in users info to display them in the success page
+        if bcrypt.checkpw(request.POST['password'].encode(), logged_user.password.encode()):#if the passwords match redirect to success page and save the logged in users info to display them in the success page
             request.session['userid'] = logged_user.id
             request.session['firstname'] = logged_user.first_name
             request.session['lastname'] = logged_user.last_name
             request.session['email'] = logged_user.email
-            return redirect('/process/success_login')
+            return redirect('/hassan')
     return redirect('/')#if passwords don't match redirect to root page to let the user try again
 #function induced upon succeful registration
 def successful_register(request , user_id):#gets the user_id as a parameter from the process registration page which sends user_id via url route
@@ -69,3 +50,32 @@ def delete(request):#the logout button redirects to the (destroy) route in the u
 def join_form(request):
     return render(request, "join_workers.html")
 
+<<<<<<< HEAD
+=======
+def create_user(request):
+    first_name=request.POST['first_name']
+    last_name=request.POST['last_name']
+    email=request.POST['email']
+    password=request.POST['password']
+    pw_hash = bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+    User.objects.create(first_name=first_name,
+                        last_name=last_name,
+                        email=email,
+                        password=pw_hash)
+    return HttpResponse('')
+
+
+def create_worker(request):
+    phone_number=request.POST['phone_number']
+    location=request.POST['location']
+    career=request.POST['career']
+    price=request.POST['price']
+    desc=request.POST['desc']
+    Worker.objects.create(phone_number=phone_number,
+                        location=location,
+                        career=career,
+                        price=price,
+                        desc=desc)
+    return HttpResponse('')
+
+>>>>>>> 5a1e3cf3fb480dcb345b74abf13ed41903c4b0d9
