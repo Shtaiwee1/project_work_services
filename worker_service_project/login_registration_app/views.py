@@ -67,3 +67,5 @@ def delete(request):#the logout button redirects to the (destroy) route in the u
 
 def join_form(request):
     return render(request, "join_workers.html")
+
+
