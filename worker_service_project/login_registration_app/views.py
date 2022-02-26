@@ -51,7 +51,10 @@ def join_form(request):
     return render(request, "join_workers.html")
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 5a1e3cf3fb480dcb345b74abf13ed41903c4b0d9
 def create_user(request):
     first_name=request.POST['first_name']
     last_name=request.POST['last_name']
@@ -63,6 +66,23 @@ def create_user(request):
                         email=email,
                         password=pw_hash)
     return HttpResponse('')
+<<<<<<< HEAD
+=======
+
+
+def create_worker(request):
+    phone_number=request.POST['phone_number']
+    location=request.POST['location']
+    career=request.POST['career']
+    price=request.POST['price']
+    desc=request.POST['desc']
+    Worker.objects.create(phone_number=phone_number,
+                        location=location,
+                        career=career,
+                        price=price,
+                        desc=desc)
+    return HttpResponse('')
+>>>>>>> 5a1e3cf3fb480dcb345b74abf13ed41903c4b0d9
 
 
 def create_worker(request):
